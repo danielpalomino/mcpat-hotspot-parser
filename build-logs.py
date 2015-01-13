@@ -16,7 +16,10 @@ re_run = '\s*Runtime\s*Dynamic\s*=\s*([0-9.]*)\s*\w*\n'
 core = re.compile(re_core+re_area+re_peak+re_subth+re_gate+re_run)
 l2 = re.compile(re_l2+re_area+re_peak+re_subth+re_gate+re_run)
 
-OFFSET = 2.7
+#OFFSET TO MULTPLY THE POWER TRACES TO INCREASE TEMPERATURE FASTER
+OFFSET = 1.5
+#FACTOR TO INCREASE THE NUMBER OF TRACES (INCREASE SIMULATION)
+N_INC = 3
 
 #READ ALL LINES OF FILE
 def get_lines_of_file(fin):
@@ -102,8 +105,8 @@ else:
 
 	all_p_traces_cores.append(p_traces_cores[0])
 
-    artificial_sim_increase(all_p_traces_cores,len(all_p_traces_cores[0]),3)
-    artificial_sim_increase(p_traces_l2s,len(p_traces_l2s[0]),3)
+    artificial_sim_increase(all_p_traces_cores,len(all_p_traces_cores[0]),N_INC)
+    artificial_sim_increase(p_traces_l2s,len(p_traces_l2s[0]),N_INC)
 
     #CALCULATE NUMBER OF TRACES TO BE PRINTED IN CASE OF FILES DIFFER (get smaller)
     number_of_traces = len(all_p_traces_cores[0])
